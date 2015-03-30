@@ -1,0 +1,30 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.31101.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mobile-Bearded-Bear.Droid", "Mobile-Bearded-Bear.Droid\Mobile-Bearded-Bear.Droid.csproj", "{AE98D569-75C7-40D3-9BB0-7D3E665D0571}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mobile-Bearded-Bear", "Mobile-Bearded-Bear\Mobile-Bearded-Bear.csproj", "{67F9D3A8-F71E-4428-913F-C37AE82CDB24}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{AE98D569-75C7-40D3-9BB0-7D3E665D0571}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AE98D569-75C7-40D3-9BB0-7D3E665D0571}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AE98D569-75C7-40D3-9BB0-7D3E665D0571}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{AE98D569-75C7-40D3-9BB0-7D3E665D0571}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AE98D569-75C7-40D3-9BB0-7D3E665D0571}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AE98D569-75C7-40D3-9BB0-7D3E665D0571}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{67F9D3A8-F71E-4428-913F-C37AE82CDB24}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{67F9D3A8-F71E-4428-913F-C37AE82CDB24}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{67F9D3A8-F71E-4428-913F-C37AE82CDB24}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{67F9D3A8-F71E-4428-913F-C37AE82CDB24}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
