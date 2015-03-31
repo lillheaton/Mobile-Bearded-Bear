@@ -12,17 +12,16 @@ namespace Mobile_Bearded_Bear
     public class Snake
     {
         // Settings
-        private const int SnakeBodySize = 100;
+        public const int SnakeBodySize = 100;
         private const float RespawnMs = 1000.0f;
 
         // Booleans
-        private bool hasMoved = false;
         public bool Dead { get { return this.deathCounter.Ticks > 0; } }
 
         // Variables
-        private List<Vector2> bodyParts;
-        private Direction currentDirection;
-        private Direction nextDirection;
+        public List<Vector2> BodyParts { get; private set; }
+        public Direction CurrentDirection { get; private set; }
+        public Direction NextDirection { get; private set; }
         private Texture2D snakeTexture;
         private TimeSpan lastUpdateTime;
         private TimeSpan updatesPerMilliseconds;
@@ -31,16 +30,16 @@ namespace Mobile_Bearded_Bear
         public Snake(Texture2D texture)
         {
             this.snakeTexture = texture;
-            this.updatesPerMilliseconds = TimeSpan.FromMilliseconds(300);
+            this.updatesPerMilliseconds = TimeSpan.FromMilliseconds(100);
 
             this.Init(new Vector2(0, 0), Direction.East);
         }
 
         private void Init(Vector2 start, Direction direction)
         {
-            this.bodyParts = new List<Vector2>();
-            this.currentDirection = direction;
-            this.nextDirection = direction;
+            this.BodyParts = new List<Vector2>();
+            this.CurrentDirection = direction;
+            this.NextDirection = direction;
 
             this.CreateBody(start, direction);
         }
@@ -48,19 +47,18 @@ namespace Mobile_Bearded_Bear
         private void CreateBody(Vector2 start, Direction direction)
         {
             var currentVec = start;
-            for (int i = 0; i < 10; i++)
+            for (int i = 0; i < 4; i++)
             {
-                this.bodyParts.Add(currentVec);
+                this.BodyParts.Add(currentVec);
                 currentVec += direction.GetVector();
             }
 
-            this.bodyParts.Reverse();
+            this.BodyParts.Reverse();
         }
 
         public void Update(GameTime gameTime)
         {
             UpdateInput();
-            CheckCollisions();
 
             if (Dead)
             {
@@ -88,7 +86,7 @@ namespace Mobile_Bearded_Bear
             rect.Width = SnakeBodySize - (margin * 2);
             rect.Height = SnakeBodySize - (margin * 2);
             
-            foreach (var snakePart in this.bodyParts)
+            foreach (var snakePart in this.BodyParts)
             {
                 rect.X = (int)snakePart.X * SnakeBodySize + margin;
                 rect.Y = (int)snakePart.Y * SnakeBodySize + margin;
@@ -100,26 +98,12 @@ namespace Mobile_Bearded_Bear
         private void UpdatePosition()
         {
             // Calculate next position
-            for (int i = this.bodyParts.Count - 1; i > 0; i--)
+            for (int i = this.BodyParts.Count - 1; i > 0; i--)
             {
-                this.bodyParts[i] = this.bodyParts[i - 1];
+                this.BodyParts[i] = this.BodyParts[i - 1];
             }
-            this.bodyParts[0] += currentDirection.GetVector();
-            currentDirection = nextDirection;
-
-            hasMoved = true;
-        }
-
-        private void CheckCollisions()
-        {
-            if(!hasMoved || Dead) return;
-
-            var snakeHead = this.bodyParts[0];
-
-            if (bodyParts.GetRange(1, bodyParts.Count - 1).Any(part => part == snakeHead))
-            {
-                this.SetDead();
-            }
+            this.BodyParts[0] += this.CurrentDirection.GetVector();
+            this.CurrentDirection = this.NextDirection;
         }
 
         private void UpdateInput()
@@ -161,15 +145,20 @@ namespace Mobile_Bearded_Bear
 
         private void TrySetNextDirection(Direction direction)
         {
-            if (!this.currentDirection.IsOppositeOf(direction))
+            if (!this.CurrentDirection.IsOppositeOf(direction))
             {
-                this.nextDirection = direction;
+                this.NextDirection = direction;
             }
         }
 
-        private void SetDead()
+        public void SetDead()
         {
             deathCounter = TimeSpan.FromMilliseconds(RespawnMs);
+        }
+
+        public void AddPart()
+        {
+            this.BodyParts.Add(this.BodyParts.Last());
         }
     }
 }
